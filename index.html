@@ -186,8 +186,9 @@
 <div class="container">
   <h1>CursedCore Hidden Internal</h1>
   <p>Developer: DecentinHell & SidboyInHell</p>
-  <p>The Best Aimbot Ever Made - <a href="https://discord.gg/jp4677TdV2" target="_blank">Join Discord Now...</a></p>
-
+  <p>UI Developer: HiteshinHell</p>
+  <p>The Best Aimbot Ever Made<br>
+    <a href="https://discord.gg/jp4677TdV2" target="_blank">Join Discord Now...</a></p>    
   <div class="control-panel">
     <h2>Aimbot Section</h2>
 
@@ -230,8 +231,7 @@
   }
 
   function toggleState(button, message) {
-    const audio = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
-    audio.play();
+    // Removed beep sound here
 
     const siblings = button.parentNode.querySelectorAll('button');
     siblings.forEach(btn => btn.classList.remove('active-on', 'active-off'));
