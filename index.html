@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta charset="UTF-8">
   <title>CursedCore Hidden</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -17,7 +17,7 @@
       background: #0b0b0d;
       color: white;
       font-family: 'Orbitron', sans-serif;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .container {
@@ -26,33 +26,29 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 20px 15px;
+      text-align: center;
       position: relative;
       z-index: 2;
-      max-width: 480px;
-      margin: 0 auto;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 2.4rem;
       color: #ff1a1a;
       text-shadow: 0 0 10px #ff1a1a;
       margin-bottom: 10px;
-      text-align: center;
     }
 
     p {
       font-size: 1rem;
       color: white;
-      text-align: center;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
       word-break: break-word;
     }
 
     a {
-      color: #ff1a1a;
+      color: #ff4d4d;
       text-decoration: none;
-      word-break: break-word;
     }
 
     a:hover {
@@ -60,67 +56,48 @@
     }
 
     footer {
-      position: absolute;
-      bottom: 5px;
-      width: 100%;
+      margin-top: 20px;
       text-align: center;
       color: #999;
       font-size: 0.75rem;
-      user-select: none;
     }
 
     .control-panel {
       background: #1b1b1d;
       border: 2px solid #ff1a1a;
       border-radius: 12px;
-      padding: 20px 15px;
+      padding: 15px;
       margin-top: 20px;
       width: 100%;
-      max-width: 480px;
-      text-align: center;
+      max-width: 360px;
       box-shadow: 0 0 10px #ff1a1a;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
     }
 
     .control-panel h2 {
       color: #ff4040;
-      font-size: 1.5rem;
-      margin-bottom: 15px;
+      font-size: 1.3rem;
+      margin-bottom: 12px;
     }
 
-    .control-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
+    .control-panel p {
+      margin: 6px 0;
+      font-size: 0.95rem;
     }
 
-    .control-row p {
-      font-size: 1.1rem;
-      flex: 1 1 100%;
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .control-row button {
+    .control-panel button {
       background: #ff4d4d;
       border: none;
-      border-radius: 8px;
-      padding: 10px 18px;
+      border-radius: 6px;
+      padding: 8px 14px;
+      margin: 4px 5px;
       color: white;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       cursor: pointer;
-      transition: transform 0.2s ease;
-      min-width: 80px;
-      flex: 1 1 120px;
-      max-width: 140px;
+      transition: 0.2s ease;
     }
 
-    .control-row button:hover {
-      transform: scale(1.1);
+    .control-panel button:hover {
+      transform: scale(1.05);
     }
 
     .active-on {
@@ -134,36 +111,34 @@
     }
 
     .log-box {
-      margin-top: 15px;
+      margin-top: 10px;
       width: 100%;
-      min-height: 90px;
+      min-height: 80px;
       max-height: 120px;
       background: black;
       border: 2px solid #ff4d4d;
       color: white;
       font-family: monospace;
-      font-size: 0.9rem;
-      padding: 10px;
+      font-size: 0.85rem;
+      padding: 8px;
       overflow-y: auto;
       text-align: left;
       white-space: pre-line;
-      border-radius: 8px;
     }
 
     .particle-container {
-      position: fixed;
+      position: absolute;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
       z-index: 0;
-      pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      width: 4px;
-      height: 4px;
+      width: 3px;
+      height: 3px;
       background: #ff1a1a;
       border-radius: 50%;
       animation: floatUp 10s infinite linear;
@@ -184,32 +159,22 @@
       }
     }
 
-    /* Responsive adjustments */
     @media (max-width: 480px) {
       h1 {
-        font-size: 2rem;
+        font-size: 1.8rem;
       }
 
       .control-panel h2 {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
       }
 
-      .control-row p {
-        font-size: 1rem;
-      }
-
-      .control-row button {
-        font-size: 1rem;
-        padding: 12px 15px;
-        min-width: 100px;
-        max-width: 100%;
-        flex: 1 1 100%;
+      .control-panel button {
+        font-size: 0.85rem;
+        padding: 6px 10px;
       }
 
       .log-box {
-        font-size: 0.85rem;
-        min-height: 80px;
-        max-height: 110px;
+        font-size: 0.75rem;
       }
     }
   </style>
@@ -221,29 +186,29 @@
 <div class="container">
   <h1>CursedCore Hidden Internal</h1>
   <p>Developer: DecentinHell & SidboyInHell</p>
-  <p>The Best Aimbot Ever Made - <a href="https://discord.gg/qtgETFpy" target="_blank" rel="noopener noreferrer">Buy Now</a></p>
+  <p>The Best Aimbot Ever Made - <a href="https://discord.gg/qtgETFpy" target="_blank">Buy Now</a></p>
 
   <div class="control-panel">
     <h2>Aimbot Section</h2>
 
-    <div class="control-row">
+    <div>
       <p>Hook ADB Server</p>
       <button onclick="toggleState(this, 'Hooked ADB')">Hook ADB</button>
     </div>
 
-    <div class="control-row">
+    <div>
       <p>Aimbot State</p>
       <button onclick="toggleState(this, 'Aimbot ON')">ON</button>
       <button onclick="toggleState(this, 'Aimbot OFF')">OFF</button>
     </div>
 
-    <div class="control-row">
+    <div>
       <p>ESP Visual</p>
       <button onclick="toggleState(this, 'ESP ON')">ON</button>
       <button onclick="toggleState(this, 'ESP OFF')">OFF</button>
     </div>
 
-    <div class="control-row">
+    <div>
       <p>Sniper Scope</p>
       <button onclick="toggleState(this, 'Sniper Scope ON')">ON</button>
       <button onclick="toggleState(this, 'Sniper Scope OFF')">OFF</button>
@@ -252,9 +217,9 @@
     <div class="log-box" id="log-box"></div>
     <button onclick="clearLog()">Clear Log</button>
   </div>
-</div>
 
-<footer>© 2025 CursedCore – All Rights Reserved</footer>
+  <footer>© 2025 CursedCore – All Rights Reserved</footer>
+</div>
 
 <script>
   const logBox = document.getElementById("log-box");
@@ -292,7 +257,8 @@
   clearLog();
 
   const particleContainer = document.getElementById('particles');
-  for (let i = 0; i < 40; i++) {
+  const particleCount = window.innerWidth < 500 ? 20 : 40;
+  for (let i = 0; i < particleCount; i++) {
     const particle = document.createElement('div');
     particle.className = 'particle';
     particle.style.left = Math.random() * 100 + 'vw';
