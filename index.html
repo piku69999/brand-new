@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>CursedCore Hidden</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <style>
     * {
       margin: 0;
@@ -20,7 +21,7 @@
     }
 
     .container {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -28,25 +29,30 @@
       padding: 20px;
       position: relative;
       z-index: 2;
-      text-align: center;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
     h1 {
-      font-size: 2.2rem;
+      font-size: 2.5rem;
       color: #ff1a1a;
       text-shadow: 0 0 10px #ff1a1a;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
+      text-align: center;
     }
 
     p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: white;
-      margin: 2px 0;
+      text-align: center;
+      margin-bottom: 8px;
+      word-break: break-word;
     }
 
     a {
       color: #ff1a1a;
       text-decoration: none;
+      word-break: break-word;
     }
 
     a:hover {
@@ -60,50 +66,61 @@
       text-align: center;
       color: #999;
       font-size: 0.75rem;
-      z-index: 3;
+      user-select: none;
     }
 
     .control-panel {
       background: #1b1b1d;
       border: 2px solid #ff1a1a;
       border-radius: 12px;
-      padding: 15px 10px;
-      margin-top: 15px;
+      padding: 20px 15px;
+      margin-top: 20px;
       width: 100%;
-      max-width: 350px;
+      max-width: 480px;
       text-align: center;
       box-shadow: 0 0 10px #ff1a1a;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .control-panel h2 {
       color: #ff4040;
-      margin-bottom: 10px;
-      font-size: 1.2rem;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
     }
 
-    .control-panel p {
-      margin: 6px 0 3px;
-      font-size: 0.9rem;
+    .control-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
     }
 
-    .control-panel div {
-      margin-bottom: 10px;
+    .control-row p {
+      font-size: 1.1rem;
+      flex: 1 1 100%;
+      text-align: center;
+      margin-bottom: 8px;
     }
 
-    .control-panel button {
+    .control-row button {
       background: #ff4d4d;
       border: none;
-      border-radius: 6px;
-      padding: 8px 16px;
-      margin: 4px;
+      border-radius: 8px;
+      padding: 10px 18px;
       color: white;
-      font-size: 0.9rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      transition: 0.2s;
+      transition: transform 0.2s ease;
+      min-width: 80px;
+      flex: 1 1 120px;
+      max-width: 140px;
     }
 
-    .control-panel button:hover {
-      transform: scale(1.05);
+    .control-row button:hover {
+      transform: scale(1.1);
     }
 
     .active-on {
@@ -117,34 +134,36 @@
     }
 
     .log-box {
-      margin-top: 10px;
+      margin-top: 15px;
       width: 100%;
-      min-height: 80px;
-      max-height: 100px;
+      min-height: 90px;
+      max-height: 120px;
       background: black;
       border: 2px solid #ff4d4d;
       color: white;
       font-family: monospace;
-      font-size: 0.8rem;
-      padding: 6px;
+      font-size: 0.9rem;
+      padding: 10px;
       overflow-y: auto;
       text-align: left;
       white-space: pre-line;
+      border-radius: 8px;
     }
 
     .particle-container {
-      position: absolute;
+      position: fixed;
       top: 0; left: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
       z-index: 0;
+      pointer-events: none;
     }
 
     .particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
+      width: 4px;
+      height: 4px;
       background: #ff1a1a;
       border-radius: 50%;
       animation: floatUp 10s infinite linear;
@@ -165,21 +184,32 @@
       }
     }
 
-    @media (max-width: 500px) {
-      h1 { font-size: 1.8rem; }
-      .control-panel h2 { font-size: 1rem; }
-      .control-panel p { font-size: 0.8rem; }
-
-      .control-panel div {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 2rem;
       }
 
-      .control-panel button {
-        width: 100%;
-        max-width: 260px;
+      .control-panel h2 {
+        font-size: 1.3rem;
+      }
+
+      .control-row p {
+        font-size: 1rem;
+      }
+
+      .control-row button {
+        font-size: 1rem;
+        padding: 12px 15px;
+        min-width: 100px;
+        max-width: 100%;
+        flex: 1 1 100%;
+      }
+
+      .log-box {
+        font-size: 0.85rem;
+        min-height: 80px;
+        max-height: 110px;
       }
     }
   </style>
@@ -191,29 +221,29 @@
 <div class="container">
   <h1>CursedCore Hidden Internal</h1>
   <p>Developer: DecentinHell & SidboyInHell</p>
-  <p>The Best Aimbot Ever Made - <a href="https://discord.gg/qtgETFpy" target="_blank">Buy Now</a></p>
+  <p>The Best Aimbot Ever Made - <a href="https://discord.gg/qtgETFpy" target="_blank" rel="noopener noreferrer">Buy Now</a></p>
 
   <div class="control-panel">
     <h2>Aimbot Section</h2>
 
-    <div>
+    <div class="control-row">
       <p>Hook ADB Server</p>
       <button onclick="toggleState(this, 'Hooked ADB')">Hook ADB</button>
     </div>
 
-    <div>
+    <div class="control-row">
       <p>Aimbot State</p>
       <button onclick="toggleState(this, 'Aimbot ON')">ON</button>
       <button onclick="toggleState(this, 'Aimbot OFF')">OFF</button>
     </div>
 
-    <div>
+    <div class="control-row">
       <p>ESP Visual</p>
       <button onclick="toggleState(this, 'ESP ON')">ON</button>
       <button onclick="toggleState(this, 'ESP OFF')">OFF</button>
     </div>
 
-    <div>
+    <div class="control-row">
       <p>Sniper Scope</p>
       <button onclick="toggleState(this, 'Sniper Scope ON')">ON</button>
       <button onclick="toggleState(this, 'Sniper Scope OFF')">OFF</button>
